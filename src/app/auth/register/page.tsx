@@ -75,7 +75,7 @@ const RegisterPage = () => {
       if (newUser) {
         window.location.assign("/auth/login");
       } else {
-        throw new Error(newUser.message);
+        throw new Error("Неуспешна регистрация, моля опитайте отново!");
       }
       console.log(values);
     } catch (err) {

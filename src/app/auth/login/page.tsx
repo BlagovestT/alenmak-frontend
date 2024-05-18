@@ -8,7 +8,6 @@ import { Form, Formik } from "formik";
 import Link from "next/link";
 import { object, string } from "yup";
 import { USER_ID } from "@/helpers/helpers";
-import { SignInSnippet } from "@/services/Auth/authTypes";
 import { signIn } from "@/services/Auth/auth";
 import logo from "../../../../public/logo.png";
 import Image from "next/image";
@@ -49,7 +48,7 @@ const LoginPage = () => {
       setFormStatus(null);
       setAlertMessage(null);
 
-      const user: SignInSnippet = await signIn(values.email, values.password);
+      const user: any = await signIn(values.email, values.password);
 
       if (!user.success) {
         setTimeout(() => {
