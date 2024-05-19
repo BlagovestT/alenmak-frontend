@@ -1,5 +1,6 @@
 import { Query } from "../apiTypes";
 import {
+  PostQueryCreateDocumentFromTemplateInput,
   PostQueryCreateDocumentInput,
   PostQueryUpdateDocumentInput,
 } from "./apiDocumentInputs";
@@ -25,4 +26,12 @@ export const postQueryUpdatedDocument = (
 export const postQueryDeleteDocument = (documentID: string): Query => ({
   endpoint: `/documents/${documentID}`,
   method: "DELETE",
+});
+
+export const postQueryCreateDocumentFromTemplate = (
+  input: PostQueryCreateDocumentFromTemplateInput
+): Query => ({
+  endpoint: "/documents/template",
+  method: "POST",
+  variables: input,
 });

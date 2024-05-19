@@ -15,12 +15,17 @@ import PatientDocumentsList from "./PatientDocumentsList";
 import {
   Document,
   GetQueryDocumentsByOwnerIdSnippet,
+  PostQueryCreateDocumentFromTemplateSnippet,
   PostQueryCreateDocumentSnippet,
 } from "@/services/Document/apiDocumentSnippets";
-import { postQueryCreateDocument } from "@/services/Document/apiDocumentPostQueries";
+import {
+  postQueryCreateDocument,
+  postQueryCreateDocumentFromTemplate,
+} from "@/services/Document/apiDocumentPostQueries";
 import { callApi } from "@/services/callApi";
 import Alert, { AlertStatuses } from "@/components/MUIComponents/Alert";
 import { getQueryDocumentsByOwnerId } from "@/services/Document/apiDocumentGetQueries";
+import { PostQueryCreateDocumentFromTemplateInput } from "@/services/Document/apiDocumentInputs";
 
 const DOCUMENTS_MENU_OPTIONS = [
   {
@@ -144,9 +149,38 @@ const PatientsDocumentModal: React.FC<PatientsDocumentModalProps> = ({
     })();
   }, [file, patientsModalData]);
 
-  const handleItemClick = (e: any) => {
-    console.log("Item Clicked " + e.detail);
-    setAnchorEl(null);
+  const handleTemplateMenuItemClick = async (templateName: string) => {
+    try {
+      setLoading(true);
+
+      if (!patientsModalData) return;
+
+      const body: PostQueryCreateDocumentFromTemplateInput = {
+        template: templateName,
+        owner: patientsModalData._id,
+      };
+
+      const createdDocmentFromTemplate =
+        await callApi<PostQueryCreateDocumentFromTemplateSnippet>({
+          query: postQueryCreateDocumentFromTemplate(body),
+        });
+
+      if (createdDocmentFromTemplate) {
+        setDocuments((prev) => [...prev, createdDocmentFromTemplate]);
+        setFormStatus("success");
+        setAlertMessage("Документа е добавен успешно!");
+        setAnchorEl(null);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error(err);
+      setFormStatus("error");
+      setAlertMessage(
+        "Възникна проблем със създаването на документа, моля опитайте отново!"
+      );
+      setAnchorEl(null);
+      setLoading(false);
+    }
   };
 
   return (
@@ -182,7 +216,7 @@ const PatientsDocumentModal: React.FC<PatientsDocumentModalProps> = ({
         >
           {DOCUMENTS_MENU_OPTIONS.map((item) => (
             <MenuItem
-              onClick={handleItemClick}
+              onClick={() => handleTemplateMenuItemClick(item.title)}
               key={item.title}
               value={item.title}
             >

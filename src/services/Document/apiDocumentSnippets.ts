@@ -22,3 +22,5 @@ export type PostQueryUpdatedDocumentSnippet = Document;
 export type PostQueryDeleteDocumentSnippet = { message: "Document removed" };
 
 export type GetQueryDownloadDocumentSnippet = File;
+
+export type PostQueryCreateDocumentFromTemplateSnippet = Document;
