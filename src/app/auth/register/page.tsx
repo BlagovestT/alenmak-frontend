@@ -50,15 +50,15 @@ const RegisterPage = () => {
     confirmPassword: "",
   };
 
-  useEffect(() => {
-    if (USER_ID) {
-      window.location.href = "/";
-    }
-    setFormStatus("warning");
-    setAlertMessage(
-      "За да създадете акаунт, моля, свържете се с администратор на сайта!"
-    );
-  }, []);
+  // useEffect(() => {
+  //   if (USER_ID) {
+  //     window.location.href = "/";
+  //   }
+  //   setFormStatus("warning");
+  //   setAlertMessage(
+  //     "За да създадете акаунт, моля, свържете се с администратор на сайта!"
+  //   );
+  // }, []);
 
   const handleFormSubmit = async (values: RegisterFormValues) => {
     try {
@@ -119,7 +119,6 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     value={values.firstname}
                     type="firstname"
-                    disabled
                   />
 
                   <TextField
@@ -130,7 +129,6 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     value={values.lastname}
                     type="lastname"
-                    disabled
                   />
 
                   <TextField
@@ -141,7 +139,6 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     value={values.email}
                     type="email"
-                    disabled
                   />
 
                   <TextField
@@ -152,7 +149,6 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     value={values.password}
                     type="password"
-                    disabled
                   />
 
                   <TextField
@@ -167,10 +163,9 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     value={values.confirmPassword}
                     type="password"
-                    disabled
                   />
 
-                  <Button message="Регистрация" type="submit" disabled />
+                  <Button message="Регистрация" type="submit" />
 
                   <Alert
                     message={alertMessage}
