@@ -55,7 +55,6 @@ const LoginPage = () => {
           throw new Error("Невалидни данни, моля опитайте отново!");
         }, 500);
       }
-      console.log(values);
     } catch (err) {
       console.log((err as Error).message);
       setFormStatus("error");

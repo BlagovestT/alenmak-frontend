@@ -18,6 +18,7 @@ export const callApi = async <T>(params: CallApiParams): Promise<T> => {
   } = query;
 
   if (!API_LINK_URL) {
+    signOut();
     throw new Error("API_URL is not defined");
   }
 

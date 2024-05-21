@@ -251,7 +251,6 @@ const columns = (
       headerName: "Действия",
       flex: 1,
       renderCell: (params: any) => {
-        console.log(params);
         return (
           <Stack
             direction="row"

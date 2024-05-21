@@ -7,6 +7,10 @@ export const signUp = async (
   email: string,
   password: string
 ): Promise<User | null> => {
+  if (!process.env.NEXT_PUBLIC_API_LINK) {
+    throw new Error("API_URL is not defined");
+  }
+
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
@@ -33,6 +37,10 @@ export const signIn = async (
   email: string,
   password: string
 ): Promise<User | null> => {
+  if (!process.env.NEXT_PUBLIC_API_LINK) {
+    throw new Error("API_URL is not defined");
+  }
+
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 

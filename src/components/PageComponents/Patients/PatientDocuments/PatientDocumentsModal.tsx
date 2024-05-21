@@ -6,7 +6,6 @@ import {
   Menu,
   MenuItem,
   Stack,
-  Tooltip,
 } from "@mui/material";
 import { DropzoneDialog } from "mui-file-dropzone";
 import Button from "@/components/MUIComponents/Button";
@@ -126,6 +125,7 @@ const PatientsDocumentModal: React.FC<PatientsDocumentModalProps> = ({
         if (file) {
           const formData = new FormData();
           formData.append("file", file);
+          formData.append("fileName", file.name);
           formData.append("owner", patientsModalData._id);
 
           const createdDocment = await callApi<PostQueryCreateDocumentSnippet>({
@@ -195,17 +195,14 @@ const PatientsDocumentModal: React.FC<PatientsDocumentModalProps> = ({
       >
         <Button message="Качи файл" onClick={() => setOpenUploadModal(true)} />
 
-        <Tooltip title="Добави Файл">
-          <IconButton
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={(e: any) => setAnchorEl(e.currentTarget)}
-            aria-label="Open to show more"
-            title="Open to show more"
-          >
-            <NoteAddIcon color="info" sx={{ fontSize: "2rem" }} />
-          </IconButton>
-        </Tooltip>
+        <IconButton
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={(e: any) => setAnchorEl(e.currentTarget)}
+          title="Добави Файл"
+        >
+          <NoteAddIcon color="info" sx={{ fontSize: "2rem" }} />
+        </IconButton>
 
         <Menu
           id="simple-menu"

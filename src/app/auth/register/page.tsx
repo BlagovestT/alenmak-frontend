@@ -77,7 +77,6 @@ const RegisterPage = () => {
       } else {
         throw new Error("Неуспешна регистрация, моля опитайте отново!");
       }
-      console.log(values);
     } catch (err) {
       console.log((err as Error).message);
       setFormStatus("error");
