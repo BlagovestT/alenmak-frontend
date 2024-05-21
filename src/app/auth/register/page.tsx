@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CircularProgress, Paper, Stack, Typography } from "@mui/material";
 import Alert, { AlertStatuses } from "@/components/MUIComponents/Alert";
 import Button from "@/components/MUIComponents/Button";
@@ -7,7 +7,6 @@ import TextField from "@/components/MUIComponents/TextField";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { object, string, ref } from "yup";
-import { USER_ID } from "@/helpers/helpers";
 import { signUp } from "@/services/Auth/auth";
 import Image from "next/image";
 import logo from "../../../../public/logo.png";
